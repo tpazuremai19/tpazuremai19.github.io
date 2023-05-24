@@ -102,6 +102,23 @@
     } catch (PDOException $e) {
         echo "Erreur de connexion à la base de données : " . $e->getMessage();
     }
+
+    // Error introduced: Undefined variable $undefinedVariable
+    echo $undefinedVariable;
+
+    // Error introduced: Using an undefined function
+    undefinedFunction();
+
+    // Error introduced: SQL injection vulnerability
+    $unsafeSearch = $_GET['search'];
+    $sqlInjection = "SELECT nom, prenom, date_naissance, adresse, cp, ville FROM utilisateurs WHERE nom LIKE '$unsafeSearch'";
+    $stmt = $conn->query($sqlInjection);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Error introduced: XSS vulnerability
+    $unsafeSearch = $_GET['search'];
+    echo "<script>var searchTerm = '$unsafeSearch';</script>";
     ?>
+
 </body>
 </html>
