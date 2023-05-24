@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+//TRUC DE FOU ET TOUT C LA V2
     <meta charset="UTF-8">
-    <title>Recherche d'utilisateurs</title>
+    <title>Recherche d'utilisateurs !!!!!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,7 +49,7 @@
     </style>
 </head>
 <body>
-    <h1>Recherche d'utilisateurs</h1>
+    <h1>Recherche d'utilisateurs !!!!</h1>
 
     <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <label for="search">Nom :</label>
