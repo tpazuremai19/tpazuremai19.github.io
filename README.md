@@ -1,19 +1,9 @@
 # tpazuremai19.github.io
-
-Prérequis :
-Avoir une instance de virtualisation:
 Pour notre cas nous avons choisit Microsoft Azure Cloud.
   Création d'une infrastructure sur azure avec :
      - Une machine linux avec docker, pour y installer Sonarqube & Jenkins
-        sous debian 11 x64
-        2 Vcpu
-        8 Go RAM
-        30 Go stockage
      - Une machine linux avec LAMP, pour y installer notre serveur web et notre bdd. (nous avons été limité à deux machines, le mieux de créer une machine par service)
-        sous Ubuntu 20.04 LTS x64
-        2 Vcpu
-        8 Go RAM
-        30 Go stockage
+       
 
 Création d'un site web en PHP, avec des failles XSS & SQL pour tester le fonctionnement, voici le site :
 #
