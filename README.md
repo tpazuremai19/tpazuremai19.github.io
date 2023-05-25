@@ -29,8 +29,9 @@ Voici les commande pour installer apache2, mysql et php :
 sudo apt-get update
 sudo apt-get install apache2 php libapache2-mod-php mariadb-server php-mysql
 ```
-```
+
 Installer les modules php :
+```
 sudo apt-get install php-curl php-gd php-intl php-json php-mbstring php-xml php-zip
 ```
 On insère la configuration du site dans le fichier /etc/apache2/sites-available/001-klite.conf :
