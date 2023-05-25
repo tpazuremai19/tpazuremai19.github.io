@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recherche de clients</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: inline-block;
+      width: 100px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 200px;
+      padding: 5px;
+    }
+
+    input[type="submit"] {
+      padding: 5px 10px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Recherche de clients</h1>
+
+  <form action="recherche.php" method="GET">
+    <label for="searchInput">Nom:</label>
+    <input type="text" id="searchInput" name="searchInput">
+    <input type="submit" value="Rechercher">
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date de naissance</th>
+        <th>Adresse</th>
+        <th>Code Postal</th>
+        <th>Ville</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php include 'affichage.php'; ?>
+    </tbody>
+  </table>
+</body>
+</html>
