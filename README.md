@@ -1,140 +1,196 @@
 # tpazuremai19.github.io
-Pour notre cas nous avons choisit Microsoft Azure Cloud.
-  Création d'une infrastructure sur azure avec :
-     - Une machine linux avec docker, pour y installer Sonarqube & Jenkins
-     - Une machine linux avec LAMP, pour y installer notre serveur web et notre bdd. (nous avons été limité à deux machines, le mieux de créer une machine par service)
-       
 
-Création d'un site web en PHP, avec des failles XSS & SQL pour tester le fonctionnement, voici le site :
-#
-"
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-  V2
-    <title>Recherche d'utilisateurs !</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
+====================================================
+##                                         PRÉREQUIS
+====================================================
 
-        h1 {
-            color: #333;
-        }
+Création d'une infrastructure Azure cloud avec :
+  - Une machine linux avec docker, pour y installer Sonarqube & Jenkins
+      sous debian 11 x64
+      2 Vcpu
+      8 Go RAM
+      30 Go stockage
 
-        form {
-            margin-bottom: 20px;
-        }
+  - Une machine Linux avec LAMP, pour y installer notre serveur web et notre bdd. (nous avons été limité à deux machines, le mieux est de créer une machine par service)
+    sous Ubuntu 20.04 LTS x64
+    2 Vcpu
+    8 Go RAM
+    30 Go stockage
 
-        input[type="text"] {
-            padding: 5px;
-            font-size: 16px;
-        }
 
-        input[type="submit"] {
-            padding: 5px 10px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
+====================================================
+   ##                        CONFIGURATION WEB & BDD
+====================================================
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
+Création d'un site web en PHP, avec des failles XSS & SQL pour tester le fonctionnement (voir fichier index.php)
 
-        table td, table th {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
+Voici les commande pour installer apache2, mysql et php :
+```
+sudo apt-get update
+sudo apt-get install apache2 php libapache2-mod-php mariadb-server php-mysql
+```
+```
+Installer les modules php :
+sudo apt-get install php-curl php-gd php-intl php-json php-mbstring php-xml php-zip
+```
+On insère la configuration du site dans le fichier /etc/apache2/sites-available/001-klite.conf :
 
-        table th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
-<body>
-    <h1>Recherche d'utilisateurs et tout</h1>
+```
+<VirtualHost *:80>
+    	#ServerName exemple.fr
+    	#ServerAlias *.exemple.fr
+    	DocumentRoot "/var/www/klite"
+    	DirectoryIndex index.php
+    	<Directory "/var/www/klite">
+            	Options -Indexes +FollowSymLinks
+            	AllowOverride none
+            	Require all granted
+    	</Directory>
+    	ErrorLog ${APACHE_LOG_DIR}/klite-error.log
+    	CustomLog ${APACHE_LOG_DIR}/klite-access.log combined
+</VirtualHost>
+```
 
-    <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <label for="search">Nom :</label>
-        <input type="text" id="search" name="search" placeholder="Entrez un nom" required>
-        <input type="submit" value="Rechercher">
-    </form>
+On désactive le site par défaut et on active notre site, puis on redémarre apache :
+```
+a2dissite 000-default.conf
+```
+```
+a2ensite 001-klite.conf
+```
+```
+systemctl restart apache2
+```
 
-    <?php
-    // Logins pour la BDD
-    $servername = "localhost";
-    $username = "mael";
-    $password = "TPqualiteCODE35";
-    $dbname = "qualite";
+Ensuite on créer une règle crontab pour importer notre code depuis github vers notre serveur web (nous utilisons la crontab de l’utilisateur standard pour des questions de sécurité).
+On créer le fichier suivant et on donne les droits à l’utilisateur sur le fichier du site web :
+```
+touch /var/www/klite/index.php
+chown mael: /var/www/klite/index.php
+```
+on édite la crontab depuis l’utilisateur en question, ici ça sera mael :
+```
+su mael
+crontab -e
+```
+On insère la commande suivante à la fin de crontab :
+```
+*/1 * * * * curl https://raw.githubusercontent.com/tpazuremai19/tpazuremai19.github.io/master/index.php > /var/www/klite/index.php
+```
 
-    try {
-        // Connexion à la bdd avec PDO
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Traiter la requete de recherche
-        if (isset($_GET['search'])) {
-            $search = $_GET['search'];
-            $sql = "SELECT nom, prenom, date_naissance, adresse, cp, ville FROM utilisateurs WHERE nom LIKE :search";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':search', "%$search%", PDO::PARAM_STR);
-            $stmt->execute();
+###Serveur BDD :
+  - Installation de phpmyadmin
+  - Création de la base de donnée
+  - Création des différentes tables 
+  - Création des utilisateurs dans les tables, et de leurs informations
 
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+###Installation de phpmyadmin : 
+apt install phpmyadmin
+On laisse les paramètres par défaut et on choisit notre utilisateur et notre mot de passe.
+Il est possible de reconfigurer phpmyadmin avec la commande suivante :
+dpkg-reconfigure phpmyadmin
 
-            if (count($result) > 0) {
-                echo "<table>";
-                echo "<tr><th>Nom</th><th>Prénom</th><th>Date de Naissance</th><th>Adresse</th><th>CP</th><th>Ville</th></tr>";
-                foreach ($result as $row) {
-                    echo "<tr>";
-                    echo "<td>".$row['nom']."</td>";
-                    echo "<td>".$row['prenom']."</td>";
-                    echo "<td>".$row['date_naissance']."</td>";
-                    echo "<td>".$row['adresse']."</td>";
-                    echo "<td>".$row['cp']."</td>";
-                    echo "<td>".$row['ville']."</td>";
-                    echo "</tr>";
-                }
-                echo "</table>";
-            } else {
-                echo "Aucun résultat trouvé.";
-            }
-        }
+On donne maintenant les droits sur notre BDD à notre utilisateur (dans notre cas on donne tous les droits à l’utilisateur car il n’y aura que notre site web sur cette BDD sinon on aurait du remplacer *.* par mydatabase.*) :
+```
+mariadb
+CREATE USER 'mael'@'localhost' identified by 'yourmdp';
+GRANT ALL ON *.* TO 'mael'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+QUIT;
+```
 
-        // Fermer la connexion à la bdd
-        $conn = null;
-    } catch (PDOException $e) {
-        echo "Erreur de connexion à la base de données : " . $e->getMessage();
-    }
 
-    // ERREUR 1 : ecrire une variable non définie 
-    echo $CetteVariableExistePasAhah;
+###Liaison du serveur web à la base de donnée :
+  - Ajout des informations de connexion à la base de donnée dans le code php
+  - Mise en place de la connexion BDD avec PDO
+  - 
 
-    // ERREUR 1 : ecrire une fonction non définie 
-    CetteFonctionExistePasAhah();
+====================================================
+   ##                INSTALLATION SONARQUBE & JENKINS
+====================================================
 
-    // ERREUR 3 : Injection SQL
-    $unsafeSearch = $_GET['search'];
-    $sqlInjection = "SELECT nom, prenom, date_naissance, adresse, cp, ville FROM utilisateurs WHERE nom LIKE '$unsafeSearch'";
-    $stmt = $conn->query($sqlInjection);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+Sur notre machine debian, nous allons installer docker à l’aide du script disponible sur : 
+https://get.docker.com/
 
-    // ERREUR 4 : Injection XSS
-    $unsafeSearch = $_GET['search'];
-    echo "<script>var searchTerm = '$unsafeSearch';</script>";
-    ?>
+Ensuite, il faut pull les images de jenkins & SonarQube : 
+```
+docker pull sonarsource/sonar-scanner-cli
+docker pull jenkins:latest
+```
 
-</body>
-</html>
-"
+Une fois installés, il nous faut les lancer. par défaut, SonarQube tourne sur le port 9000 et jenkins le 8080 : 
+```
+sudo docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
+sudo docker run -p 8080:8080 --name=jenkins-master -d jenkins/jenkins jenkins:jenkins
+```
+
+====================================================
+      ##             CONFIGURATION SONARQUBE & JENKINS
+====================================================
 
 
 
+
+
+
+====================================================
+ ## BIBLIOGRAPHIE
+====================================================
+
+lien pour docker: 
+```
+https://get.docker.com/
+```
+lien pour download SonarQube: 
+```https://www.sonarsource.com/products/sonarqube/downloads/success-download-community-edition/```
+
+intégrez Jenkins:
+```
+https://docs.sonarqube.org/latest/analyzing-source-code/scanners/jenkins-extension-sonarqube/
+```
+```
+https://www.youtube.com/watch?v=KsTMy0920go
+```
+```
+https://intellitech.pro/fr/integrer-sonarqube-avec-jenkins/
+```
+https://computingforgeeks.com/how-to-integrate-sonarqube-with-jenkins/?utm_content=cmp-true
+```
+
+lien pour installe OWASP Dependency-Check:
+```
+https://plugins.jenkins.io/dependency-check-jenkins-plugin/
+```
+
+
+
+====================================================
+ANNEXES
+====================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+====================================================
+RÉSUMÉ
+====================================================
 
