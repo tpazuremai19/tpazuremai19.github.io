@@ -54,7 +54,7 @@ Pour ce faire, SonarQube et Jenkins ont été recommandés et mis en place pour 
 
 
 
-<div id='CONFIGURATIONWEBBDD'/>  ## CONFIGURATION WEB & BDD
+## CONFIGURATION WEB & BDD <div id='CONFIGURATIONWEBBDD'/>
 
 
 Création d'un site web en PHP, avec des failles XSS & SQL pour tester le fonctionnement **(voir fichier index.php)**
