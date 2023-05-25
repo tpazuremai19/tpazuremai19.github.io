@@ -8,8 +8,8 @@ Création d'un site web en PHP, avec des failles XSS & SQL pour tester le foncti
 <!DOCTYPE html>
 <html>
 <head>
-V2
     <meta charset="UTF-8">
+  V2
     <title>Recherche d'utilisateurs !</title>
     <style>
         body {
