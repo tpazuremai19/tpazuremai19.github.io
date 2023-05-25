@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-//TRUC DE FOU ET TOUT C LA V2
+V2
     <meta charset="UTF-8">
-    <title>Recherche d'utilisateurs !!!!!</title>
+    <title>Recherche d'utilisateurs !</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -49,7 +49,7 @@
     </style>
 </head>
 <body>
-    <h1>Recherche d'utilisateurs !!!!</h1>
+    <h1>Recherche d'utilisateurs et tout</h1>
 
     <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <label for="search">Nom :</label>
@@ -58,18 +58,18 @@
     </form>
 
     <?php
-    // Paramètres de connexion à la base de données
+    // Logins pour la BDD
     $servername = "localhost";
     $username = "mael";
     $password = "TPqualiteCODE35";
     $dbname = "qualite";
 
     try {
-        // Connexion à la base de données avec PDO
+        // Connexion à la bdd avec PDO
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Traitement de la requête de recherche
+        // Traiter la requete de recherche
         if (isset($_GET['search'])) {
             $search = $_GET['search'];
             $sql = "SELECT nom, prenom, date_naissance, adresse, cp, ville FROM utilisateurs WHERE nom LIKE :search";
@@ -98,25 +98,25 @@
             }
         }
 
-        // Fermeture de la connexion à la base de données
+        // Fermer la connexion à la bdd
         $conn = null;
     } catch (PDOException $e) {
         echo "Erreur de connexion à la base de données : " . $e->getMessage();
     }
 
-    // Error introduced: Undefined variable $undefinedVariable
-    echo $undefinedVariable;
+    // ERREUR 1 : ecrire une variable non définie 
+    echo $CetteVariableExistePasAhah;
 
-    // Error introduced: Using an undefined function
-    undefinedFunction();
+    // ERREUR 1 : ecrire une fonction non définie 
+    CetteFonctionExistePasAhah();
 
-    // Error introduced: SQL injection vulnerability
+    // ERREUR 3 : Injection SQL
     $unsafeSearch = $_GET['search'];
     $sqlInjection = "SELECT nom, prenom, date_naissance, adresse, cp, ville FROM utilisateurs WHERE nom LIKE '$unsafeSearch'";
     $stmt = $conn->query($sqlInjection);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Error introduced: XSS vulnerability
+    // ERREUR 4 : Injection XSS
     $unsafeSearch = $_GET['search'];
     echo "<script>var searchTerm = '$unsafeSearch';</script>";
     ?>
