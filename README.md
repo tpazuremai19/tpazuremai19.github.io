@@ -1,13 +1,23 @@
 # tpazuremai19.github.io
 
+
 ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/cd871aa8-b979-4bee-bb72-426d49093422) ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/b005ee39-b1ea-4200-a2ee-8d7fb90b07b9) ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/3a635b1b-bef3-4786-a2ac-3645cbdf2390) ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/4b62e229-2631-46bf-aee5-f2e57f09237a)
-![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/a7822600-34ec-4f63-b3a3-24dbda713131)
+
+
+====================================================
+## INTRODUCTION
+====================================================
+
+Dans une logique d'intégration continue, nous avons besoin d’un outil de vérification du code à des fins de fiabilisation et de sécurisation de celui-ci.
+
+Pour ce faire, SonarQube et Jenkins ont été recommandés et mis en place pour tester notre code sur Github.
+
 
 ====================================================
 ##                                         PRÉREQUIS
 ====================================================
 
-Création d'une infrastructure Azure cloud avec :
+### Création d'une infrastructure Azure cloud avec :
   - Une machine linux avec docker, pour y installer Sonarqube & Jenkins
       sous debian 11 x64
       2 Vcpu
@@ -25,19 +35,19 @@ Création d'une infrastructure Azure cloud avec :
    ##                        CONFIGURATION WEB & BDD
 ====================================================
 
-Création d'un site web en PHP, avec des failles XSS & SQL pour tester le fonctionnement (voir fichier index.php)
+Création d'un site web en PHP, avec des failles XSS & SQL pour tester le fonctionnement **(voir fichier index.php)**
 
-Voici les commande pour installer apache2, mysql et php :
+Voici les commande pour installer **apache2, mysql et php** :
 ```
 sudo apt-get update
 sudo apt-get install apache2 php libapache2-mod-php mariadb-server php-mysql
 ```
 
-Installer les modules php :
+###Installer les modules php :
 ```
 sudo apt-get install php-curl php-gd php-intl php-json php-mbstring php-xml php-zip
 ```
-On insère la configuration du site dans le fichier /etc/apache2/sites-available/001-klite.conf :
+On insère la configuration du site dans le fichier **/etc/apache2/sites-available/001-klite.conf :**
 
 ```
 <VirtualHost *:80>
@@ -87,11 +97,17 @@ On insère la commande suivante à la fin de crontab :
   - Création des différentes tables 
   - Création des utilisateurs dans les tables, et de leurs informations
 
+
 ###Installation de phpmyadmin : 
+```
 apt install phpmyadmin
+```
+
 On laisse les paramètres par défaut et on choisit notre utilisateur et notre mot de passe.
 Il est possible de reconfigurer phpmyadmin avec la commande suivante :
+```
 dpkg-reconfigure phpmyadmin
+```
 
 On donne maintenant les droits sur notre BDD à notre utilisateur (dans notre cas on donne tous les droits à l’utilisateur car il n’y aura que notre site web sur cette BDD sinon on aurait du remplacer *.* par mydatabase.*) :
 ```
@@ -128,8 +144,79 @@ sudo docker run -p 8080:8080 --name=jenkins-master -d jenkins/jenkins jenkins:je
 ```
 
 ====================================================
-      ##             CONFIGURATION SONARQUBE & JENKINS
+      ##             CONFIGURATION SONARQUBE ====================================================
+
+Sur l’interface, il faut aller dans Administration>Projects>Management>Create Project
+
+Nous créons notre projet avec un nom et une clée.
+Ensuite, nous cliquons sur le projet, et il nous propose de configurer SonarQube avec une CI. dans notre cas, avec Jenkins.
+Nous choisissons ensuite Github.
+
+nous arrivons aux prérequis : 
+Avoir  SonarQube scanner plugin for Jenkins, il doit etre installé en version 2.11 ou plus
+ce site montre comment l’installer : https://docs.sonarqube.org/10.0/analyzing-source-code/ci-integration/jenkins-integration/
+
+Créer un pipeline Job : 
+1. From Jenkins' dashboard, click New Item and create a Pipeline Job.
+2. Under Build Triggers, choose Trigger builds remotely. You must set a unique, secret token     for this field.
+
+3. Under Pipeline, make sure the parameters are set as follows:
+Definition: Pipeline script from SCM
+SCM: Configure your SCM. Make sure to only build your main branch. For example, if your main branch is called "main", put "*/main" under Branches to build.
+Script Path: Jenkinsfile
+
+4. Click Save.
+
+
+Créer un Github Webhook, avec ces infos : 
+***JENKINS_SERVER_URL***/job/***JENKINS_JOB_NAME***/build?token=***JENKINS_BUILD_TRIGGER_TOKEN***
+
+Création du Jenkinsfile : 
+spécifier Maven, il va ensuite vous donner un fichier, que vous devrez insérer dans votre projet Github.
+On fait ensuite suivant, il ne reste plus qu'à lancer le build depuis jenkins
+
+
+
 ====================================================
+      ##             CONFIGURATION JENKINS
+====================================================
+
+
+Installer le plug-in SonarQube Scanner
+
+Tableau de bord > Administrer Jenkins > Plugins > Available plugins>SonarQube Scanner for Jenkins
+
+qui va nous servir de lui entre jenkins et sonarQube 
+
+Générer un jeton dans SonarQube Server
+
+l'icône de votre compte administrateur > Mon compte > Sécurité > Generate Tokens 
+
+Configurer SonarQube dans Jenkins
+
+Tableau de bord > Administrer Jenkins > Configurer le système > configuration de SonarQube > cliquez sur Ajouter SonarQube > Server authentication token > Ajouter > Jenkins 
+
+Domaine : Identifiants Globaux 
+Type : Secret text 
+	Portée:  Global 
+	Secret : Token generate
+	ID: nom interne
+	Description : nom interne
+
+Puis ajouter
+
+
+Configurer le scanner SonarQube
+
+Tableau de bord > Administrer Jenkins > Tools > Scanner SonarQube
+
+
+ Ajouter un scanner SonarQube : 
+SonarQube Scanner Name : Name 
+SONAR_RUNNER_HOME : /opt/sonarqube/bin 
+
+décochez installer automatiquement
+	
 
 
 
@@ -145,7 +232,9 @@ lien pour docker:
 https://get.docker.com/
 ```
 lien pour download SonarQube: 
-```https://www.sonarsource.com/products/sonarqube/downloads/success-download-community-edition/```
+```
+https://www.sonarsource.com/products/sonarqube/downloads/success-download-community-edition/
+```
 
 intégrez Jenkins:
 ```
@@ -156,6 +245,7 @@ https://www.youtube.com/watch?v=KsTMy0920go
 ```
 ```
 https://intellitech.pro/fr/integrer-sonarqube-avec-jenkins/
+```
 ```
 https://computingforgeeks.com/how-to-integrate-sonarqube-with-jenkins/?utm_content=cmp-true
 ```
@@ -171,6 +261,7 @@ https://plugins.jenkins.io/dependency-check-jenkins-plugin/
 ANNEXES
 ====================================================
 
+![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/a7822600-34ec-4f63-b3a3-24dbda713131)
 
 
 
@@ -192,7 +283,4 @@ ANNEXES
 
 
 
-====================================================
-RÉSUMÉ
-====================================================
 
