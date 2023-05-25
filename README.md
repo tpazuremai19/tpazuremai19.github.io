@@ -1,6 +1,4 @@
 # tpazuremai19.github.io
-![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/cd871aa8-b979-4bee-bb72-426d49093422) ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/b005ee39-b1ea-4200-a2ee-8d7fb90b07b9) ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/3a635b1b-bef3-4786-a2ac-3645cbdf2390) ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/4b62e229-2631-46bf-aee5-f2e57f09237a)
-![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/a7822600-34ec-4f63-b3a3-24dbda713131)
 
 ====================================================
 ##                                         PRÉREQUIS
