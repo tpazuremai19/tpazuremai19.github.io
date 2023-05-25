@@ -3,6 +3,27 @@
 ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/7a3158e3-0494-4b82-af6d-13801d6e4de3) 
 
 
+*******
+
+## Table des matières
+
+ - [INTRODUCTION](https://github.com/tpazuremai19/tpazuremai19.github.io/edit/master/README.md#introduction)
+ - [PRÉREQUIS](#PRÉREQUIS)
+ - [Sécurité](#sécurité)
+ - [Inscription GitLab](#inscription)
+ - [Créer un projet](#créer-un-projet)
+ - [Fourcher (forker) un projet](#fourcher-forker-un-projet)
+ - [Gestion des fichiers](#gestion-des-fichiers)
+ - [Demandes de fusion](#demandes-de-fusion)
+ - [Le format Markdown](#am%C3%A9liorer-ses-textes-avec-le-format-markdown)
+ - [Gestion des issues](#les-issues)
+ - [FAQ](#faq)
+ - [Liens](#liens)
+ - [Glossaire](#glossaire)
+
+
+*******
+
 
 ## INTRODUCTION
 
