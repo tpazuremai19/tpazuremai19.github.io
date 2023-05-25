@@ -1,7 +1,7 @@
 # tpazuremai19.github.io
 
+![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/7a3158e3-0494-4b82-af6d-13801d6e4de3) 
 
-![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/7a3158e3-0494-4b82-af6d-13801d6e4de3)
 
 ====================================================
 ## INTRODUCTION
@@ -98,7 +98,6 @@ On insère la commande suivante à la fin de crontab :
 
 
 ### Installation de phpmyadmin : 
-
 ```
 apt install phpmyadmin
 ```
@@ -109,7 +108,7 @@ Il est possible de reconfigurer phpmyadmin avec la commande suivante :
 dpkg-reconfigure phpmyadmin
 ```
 
-On donne maintenant les droits sur notre BDD à notre utilisateur (dans notre cas on donne tous les droits à l’utilisateur car il n’y aura que notre site web sur cette BDD sinon on aurait du remplacer >*.* par mydatabase.*) :
+On donne maintenant les droits sur notre BDD à notre utilisateur (dans notre cas on donne tous les droits à l’utilisateur car il n’y aura que notre site web sur cette BDD sinon on aurait du remplacer *.* par mydatabase.*) :
 ```
 mariadb
 CREATE USER 'mael'@'localhost' identified by 'yourmdp';
@@ -119,10 +118,9 @@ QUIT;
 ```
 
 
-###Liaison du serveur web à la base de donnée :
+### Liaison du serveur web à la base de donnée :
   - Ajout des informations de connexion à la base de donnée dans le code php
   - Mise en place de la connexion BDD avec PDO
-  - 
 
 ====================================================
    ##                INSTALLATION SONARQUBE & JENKINS
@@ -178,7 +176,7 @@ On fait ensuite suivant, il ne reste plus qu'à lancer le build depuis jenkins
 
 
 ====================================================
- ## CONFIGURATION JENKINS
+## CONFIGURATION JENKINS
 ====================================================
 
 
@@ -215,7 +213,23 @@ Tableau de bord > Administrer Jenkins > Tools > Scanner SonarQube
 SonarQube Scanner Name : Name 
 SONAR_RUNNER_HOME : /opt/sonarqube/bin 
 
-décochez installer automatiquement
+Décochez installer automatiquement
+
+Nouveau Item > Pipeline >  
+
+cocher GitHub hook trigger for GITScm polling
+
+Definition : Pipeline script from SCM 
+	SCM: Git 
+	Repository URL : https://github.com/tpazuremai19/tpazuremai19.github.io.git
+	Credentials :  Token 
+	Branch Specifier (blank for 'any') : */master branch Github
+	Script Path : Jenkinsfile-1 
+
+
+
+
+
 	
 
 
@@ -258,29 +272,7 @@ https://plugins.jenkins.io/dependency-check-jenkins-plugin/
 
 
 ====================================================
- ## ANNEXES
+## ANNEXES
 ====================================================
 
 ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/a7822600-34ec-4f63-b3a3-24dbda713131)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
