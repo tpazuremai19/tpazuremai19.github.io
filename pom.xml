@@ -1,0 +1,17 @@
+<root>
+  <element1>
+    <subelement1>Contenu du sous-élément 1</subelement1>
+    <subelement2>Contenu du sous-élément 2</subelement2>
+  </element1>
+  
+  <element2>
+    <subelement3>Contenu du sous-élément 3</subelement3>
+    <subelement4>Contenu du sous-élément 4</subelement4>
+    <subelement5>Contenu du sous-élément 5</subelement5>
+  </element2>
+  
+  <element3>
+    <subelement6>Contenu du sous-élément 6</subelement6>
+    <subelement7>Contenu du sous-élément 7</subelement7>
+    <subelement8>Contenu du sous-élément 8</subelement8>
+</root>
