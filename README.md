@@ -178,7 +178,7 @@ On fait ensuite suivant, il ne reste plus qu'à lancer le build depuis jenkins
 
 
 ====================================================
-## CONFIGURATION JENKINS
+ ## CONFIGURATION JENKINS
 ====================================================
 
 
@@ -258,7 +258,7 @@ https://plugins.jenkins.io/dependency-check-jenkins-plugin/
 
 
 ====================================================
-## ANNEXES
+ ## ANNEXES
 ====================================================
 
 ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/a7822600-34ec-4f63-b3a3-24dbda713131)
