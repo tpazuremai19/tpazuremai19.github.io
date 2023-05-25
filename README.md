@@ -190,15 +190,16 @@ Avoir  SonarQube scanner plugin for Jenkins, il doit etre installé en version 2
 ce site montre comment l’installer : https://docs.sonarqube.org/10.0/analyzing-source-code/ci-integration/jenkins-integration/
 
 Créer un pipeline Job : 
-1. From Jenkins' dashboard, click New Item and create a Pipeline Job.
-2. Under Build Triggers, choose Trigger builds remotely. You must set a unique, secret token     for this field.
 
-3. Under Pipeline, make sure the parameters are set as follows:
-Definition: Pipeline script from SCM
-SCM: Configure your SCM. Make sure to only build your main branch. For example, if your main branch is called "main", put "*/main" under Branches to build.
-Script Path: Jenkinsfile
+	1. From Jenkins' dashboard, click New Item and create a Pipeline Job.
+	2. Under Build Triggers, choose Trigger builds remotely. You must set a unique, secret token     for this field.
 
-4. Click Save.
+	3. Under Pipeline, make sure the parameters are set as follows:
+	Definition: Pipeline script from SCM
+	SCM: Configure your SCM. Make sure to only build your main branch. For example, if your main branch is called "main", put "*/main" under Branches to build.
+	Script Path: Jenkinsfile
+
+	4. Click Save.
 
 
 Créer un Github Webhook, avec ces infos : 
