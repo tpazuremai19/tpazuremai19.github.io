@@ -7,19 +7,18 @@
 
 ## Table des matières
 
- - [INTRODUCTION](https://github.com/tpazuremai19/tpazuremai19.github.io/edit/master/README.md#introduction)
+ - [INTRODUCTION](INTRODUCTION)
  - [PRÉREQUIS](#PRÉREQUIS)
- - [Sécurité](#sécurité)
- - [Inscription GitLab](#inscription)
- - [Créer un projet](#créer-un-projet)
- - [Fourcher (forker) un projet](#fourcher-forker-un-projet)
- - [Gestion des fichiers](#gestion-des-fichiers)
- - [Demandes de fusion](#demandes-de-fusion)
- - [Le format Markdown](#am%C3%A9liorer-ses-textes-avec-le-format-markdown)
- - [Gestion des issues](#les-issues)
- - [FAQ](#faq)
- - [Liens](#liens)
- - [Glossaire](#glossaire)
+ - [CONFIGURATION WEB & BDD](#CONFIGURATION WEB & BDD)
+	- [Installer les modules php](#Installer les modules php)
+	- [Serveur BDD](#Serveur BDD)
+ 	- [Installation de phpmyadmin](#Installation de phpmyadmin)
+ 	- [Liaison du serveur web à la base de donnée](#Liaison du serveur web à la base de donnée)
+ - [INSTALLATION SONARQUBE & JENKINS](#INSTALLATION SONARQUBE & JENKINS)
+ - [CONFIGURATION SONARQUBE](#CONFIGURATION SONARQUBE)
+ - [CONFIGURATION JENKINS](#CONFIGURATION JENKINS)
+ - [BIBLIOGRAPHIE](#BIBLIOGRAPHIE)
+ - [ANNEXES](#ANNEXES)
 
 
 *******
