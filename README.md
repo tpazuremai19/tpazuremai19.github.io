@@ -12,8 +12,12 @@ Dans une logique d'intégration continue, nous avons besoin d’un outil de vér
 Pour ce faire, SonarQube et Jenkins ont été recommandés et mis en place pour tester notre code sur Github.
 
 
+
+
+
+
 ====================================================
-##                                         PRÉREQUIS
+## PRÉREQUIS
 ====================================================
 
 ### Création d'une infrastructure Azure cloud avec :
@@ -31,18 +35,18 @@ Pour ce faire, SonarQube et Jenkins ont été recommandés et mis en place pour 
 
 
 ====================================================
-   ##                        CONFIGURATION WEB & BDD
+## CONFIGURATION WEB & BDD
 ====================================================
 
 Création d'un site web en PHP, avec des failles XSS & SQL pour tester le fonctionnement **(voir fichier index.php)**
 
-Voici les commande pour installer **apache2, mysql et php** :
+Voici les commande pour installer __apache2, mysql et php__ :
 ```
 sudo apt-get update
 sudo apt-get install apache2 php libapache2-mod-php mariadb-server php-mysql
 ```
 
-###Installer les modules php :
+### Installer les modules php :
 ```
 sudo apt-get install php-curl php-gd php-intl php-json php-mbstring php-xml php-zip
 ```
@@ -142,7 +146,8 @@ sudo docker run -p 8080:8080 --name=jenkins-master -d jenkins/jenkins jenkins:je
 ```
 
 ====================================================
-      ##             CONFIGURATION SONARQUBE ====================================================
+## CONFIGURATION SONARQUBE
+====================================================
 
 Sur l’interface, il faut aller dans Administration>Projects>Management>Create Project
 
@@ -172,7 +177,6 @@ Créer un Github Webhook, avec ces infos :
 Création du Jenkinsfile : 
 spécifier Maven, il va ensuite vous donner un fichier, que vous devrez insérer dans votre projet Github.
 On fait ensuite suivant, il ne reste plus qu'à lancer le build depuis jenkins
-
 
 
 ====================================================
@@ -225,14 +229,6 @@ Definition : Pipeline script from SCM
 	Credentials :  Token 
 	Branch Specifier (blank for 'any') : */master branch Github
 	Script Path : Jenkinsfile-1 
-
-
-
-
-
-	
-
-
 
 
 
