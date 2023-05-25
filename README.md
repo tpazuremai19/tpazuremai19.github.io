@@ -54,7 +54,9 @@ On insère la configuration du site dans le fichier /etc/apache2/sites-available
 On désactive le site par défaut et on active notre site, puis on redémarre apache :
 ```
 a2dissite 000-default.conf
+
 a2ensite 001-klite.conf
+
 systemctl restart apache2
 ```
 
