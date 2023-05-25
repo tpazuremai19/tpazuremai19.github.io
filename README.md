@@ -1,8 +1,7 @@
 # tpazuremai19.github.io
 
 
-![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/76610617-3350-4247-8ec1-85a442e75bab)
-
+![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/7a3158e3-0494-4b82-af6d-13801d6e4de3)
 
 ====================================================
 ## INTRODUCTION
@@ -110,7 +109,7 @@ Il est possible de reconfigurer phpmyadmin avec la commande suivante :
 dpkg-reconfigure phpmyadmin
 ```
 
-On donne maintenant les droits sur notre BDD à notre utilisateur (dans notre cas on donne tous les droits à l’utilisateur car il n’y aura que notre site web sur cette BDD sinon on aurait du remplacer *.* par mydatabase.*) :
+On donne maintenant les droits sur notre BDD à notre utilisateur (dans notre cas on donne tous les droits à l’utilisateur car il n’y aura que notre site web sur cette BDD sinon on aurait du remplacer >*.* par mydatabase.*) :
 ```
 mariadb
 CREATE USER 'mael'@'localhost' identified by 'yourmdp';
