@@ -3,9 +3,9 @@
 ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/7a3158e3-0494-4b82-af6d-13801d6e4de3) 
 
 
-====================================================
+
 ## INTRODUCTION
-====================================================
+
 
 Dans une logique d'intégration continue, nous avons besoin d’un outil de vérification du code à des fins de fiabilisation et de sécurisation de celui-ci.
 
@@ -16,9 +16,8 @@ Pour ce faire, SonarQube et Jenkins ont été recommandés et mis en place pour 
 
 
 
-====================================================
 ## PRÉREQUIS
-====================================================
+
 
 ### Création d'une infrastructure Azure cloud avec :
   - Une machine linux avec docker, pour y installer Sonarqube & Jenkins
@@ -34,9 +33,9 @@ Pour ce faire, SonarQube et Jenkins ont été recommandés et mis en place pour 
     30 Go stockage
 
 
-====================================================
+
 ## CONFIGURATION WEB & BDD
-====================================================
+
 
 Création d'un site web en PHP, avec des failles XSS & SQL pour tester le fonctionnement **(voir fichier index.php)**
 
@@ -126,9 +125,9 @@ QUIT;
   - Ajout des informations de connexion à la base de donnée dans le code php
   - Mise en place de la connexion BDD avec PDO
 
-====================================================
+
    ##                INSTALLATION SONARQUBE & JENKINS
-====================================================
+
 
 Sur notre machine debian, nous allons installer docker à l’aide du script disponible sur : 
 https://get.docker.com/
@@ -145,9 +144,9 @@ sudo docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 sudo docker run -p 8080:8080 --name=jenkins-master -d jenkins/jenkins jenkins:jenkins
 ```
 
-====================================================
+
 ## CONFIGURATION SONARQUBE
-====================================================
+
 
 Sur l’interface, il faut aller dans Administration>Projects>Management>Create Project
 
@@ -179,9 +178,9 @@ spécifier Maven, il va ensuite vous donner un fichier, que vous devrez insérer
 On fait ensuite suivant, il ne reste plus qu'à lancer le build depuis jenkins
 
 
-====================================================
+
 ## CONFIGURATION JENKINS
-====================================================
+
 
 
 Installer le plug-in SonarQube Scanner
@@ -233,9 +232,9 @@ Definition : Pipeline script from SCM
 
 
 
-====================================================
+
  ## BIBLIOGRAPHIE
-====================================================
+
 
 lien pour docker: 
 ```
@@ -267,8 +266,8 @@ https://plugins.jenkins.io/dependency-check-jenkins-plugin/
 
 
 
-====================================================
+
 ## ANNEXES
-====================================================
+
 
 ![image](https://github.com/tpazuremai19/tpazuremai19.github.io/assets/134396376/a7822600-34ec-4f63-b3a3-24dbda713131)
