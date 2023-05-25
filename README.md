@@ -53,8 +53,8 @@ Pour ce faire, SonarQube et Jenkins ont été recommandés et mis en place pour 
     30 Go stockage
 
 
-<div id='CONFIGURATIONWEBBDD'/>  
-## CONFIGURATION WEB & BDD
+
+<div id='CONFIGURATIONWEBBDD'/>  ## CONFIGURATION WEB & BDD
 
 
 Création d'un site web en PHP, avec des failles XSS & SQL pour tester le fonctionnement **(voir fichier index.php)**
