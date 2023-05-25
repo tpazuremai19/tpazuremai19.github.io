@@ -10,13 +10,13 @@
  - [INTRODUCTION](INTRODUCTION)
  - [PRÉREQUIS](#PRÉREQUIS)
  - [CONFIGURATION WEB & BDD](#CONFIGURATIONWEBBDD)
-	- [Installer les modules php](#Installer)
-	- [Serveur BDD](#Serveur)
- 	- [Installation de phpmyadmin](#Installation)
- 	- [Liaison du serveur web à la base de donnée](#Liaison )
- - [INSTALLATION SONARQUBE & JENKINS](#INSTALLATION)
- - [CONFIGURATION SONARQUBE](#CONFIGURATION)
- - [CONFIGURATION JENKINS](#CONFIGURATION JENKINS)
+	- [Installer les modules php](#Installerlesmodulesphp)
+	- [Serveur BDD](#ServeurBDD)
+ 	- [Installation de phpmyadmin](#Installationdephpmyadmin)
+ 	- [Liaison du serveur web à la base de donnée](#Liaisonduserveurwebàlabasededonnée)
+ - [INSTALLATION SONARQUBE & JENKINS](#INSTALLATIONSONARQUBEJENKINS)
+ - [CONFIGURATION SONARQUBE](#CONFIGURATIONSONARQUBE)
+ - [CONFIGURATION JENKINS](#CONFIGURATIONJENKINS)
  - [BIBLIOGRAPHIE](#BIBLIOGRAPHIE)
  - [ANNEXES](#ANNEXES)
 
@@ -64,6 +64,7 @@ Voici les commande pour installer __apache2, mysql et php__ :
 sudo apt-get update
 sudo apt-get install apache2 php libapache2-mod-php mariadb-server php-mysql
 ```
+<div id='Installerlesmodulesphp'/>
 
 ### Installer les modules php :
 ```
@@ -112,12 +113,16 @@ On insère la commande suivante à la fin de crontab :
 */1 * * * * curl https://raw.githubusercontent.com/tpazuremai19/tpazuremai19.github.io/master/index.php > /var/www/klite/index.php
 ```
 
+<div id='ServeurBDD'/>
 
 ### Serveur BDD :
   - Installation de phpmyadmin
   - Création de la base de donnée
   - Création des différentes tables 
   - Création des utilisateurs dans les tables, et de leurs informations
+
+
+<div id='Installationdephpmyadmin'/>
 
 
 ### Installation de phpmyadmin : 
@@ -141,12 +146,16 @@ QUIT;
 ```
 
 
+<div id='Liaisonduserveurwebàlabasededonnée'/>
+
 ### Liaison du serveur web à la base de donnée :
   - Ajout des informations de connexion à la base de donnée dans le code php
   - Mise en place de la connexion BDD avec PDO
 
 
-   ##                INSTALLATION SONARQUBE & JENKINS
+<div id='INSTALLATIONSONARQUBEJENKINS'/>
+
+## INSTALLATION SONARQUBE & JENKINS
 
 
 Sur notre machine debian, nous allons installer docker à l’aide du script disponible sur : 
@@ -164,6 +173,8 @@ sudo docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 sudo docker run -p 8080:8080 --name=jenkins-master -d jenkins/jenkins jenkins:jenkins
 ```
 
+
+<div id='CONFIGURATIONSONARQUBE'/>
 
 ## CONFIGURATION SONARQUBE
 
@@ -191,13 +202,15 @@ Script Path: Jenkinsfile
 
 
 Créer un Github Webhook, avec ces infos : 
+```
 ***JENKINS_SERVER_URL***/job/***JENKINS_JOB_NAME***/build?token=***JENKINS_BUILD_TRIGGER_TOKEN***
-
+```
 Création du Jenkinsfile : 
 spécifier Maven, il va ensuite vous donner un fichier, que vous devrez insérer dans votre projet Github.
 On fait ensuite suivant, il ne reste plus qu'à lancer le build depuis jenkins
 
 
+<div id='CONFIGURATIONJENKINS'/>
 
 ## CONFIGURATION JENKINS
 
