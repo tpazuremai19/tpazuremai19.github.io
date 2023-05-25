@@ -16,7 +16,7 @@
  	- [Liaison du serveur web à la base de donnée](#Liaison )
  - [INSTALLATION SONARQUBE & JENKINS](#INSTALLATION)
  - [CONFIGURATION SONARQUBE](#CONFIGURATION)
- - [CONFIGURATION JENKINS](#JENKINS)
+ - [CONFIGURATION JENKINS](#https://github.com/tpazuremai19/tpazuremai19.github.io/blob/master/README.md#configuration-jenkins)
  - [BIBLIOGRAPHIE](#BIBLIOGRAPHIE)
  - [ANNEXES](#ANNEXES)
 
