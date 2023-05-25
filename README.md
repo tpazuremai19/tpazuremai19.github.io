@@ -91,14 +91,15 @@ On insère la commande suivante à la fin de crontab :
 ```
 
 
-###Serveur BDD :
+### Serveur BDD :
   - Installation de phpmyadmin
   - Création de la base de donnée
   - Création des différentes tables 
   - Création des utilisateurs dans les tables, et de leurs informations
 
 
-###Installation de phpmyadmin : 
+### Installation de phpmyadmin : 
+
 ```
 apt install phpmyadmin
 ```
